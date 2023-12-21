@@ -14,9 +14,10 @@ import (
 
 	"github.com/golang-jwt/jwt"
 	"github.com/udhos/boilerplate/envconfig"
+	_ "go.uber.org/automaxprocs"
 )
 
-const version = "0.0.0"
+const version = "0.1.1"
 
 func getVersion(me string) string {
 	return fmt.Sprintf("%s version=%s runtime=%s GOOS=%s GOARCH=%s GOMAXPROCS=%d",

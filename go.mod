@@ -5,6 +5,7 @@ go 1.21.5
 require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/udhos/boilerplate v1.2.1
+	go.uber.org/automaxprocs v1.5.3
 )
 
 require (
@@ -34,5 +35,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.18.7 // indirect
 	github.com/aws/smithy-go v1.13.5 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
+	github.com/kr/text v0.2.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
