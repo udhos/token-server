@@ -1,6 +1,6 @@
 # STEP 1 build executable binary
 
-FROM golang:1.21.5-alpine3.18 as builder
+FROM golang:1.21.6-alpine3.19 as builder
 
 RUN apk update
 RUN apk add git
@@ -20,7 +20,7 @@ RUN go build -o /tmp/token-server github.com/udhos/token-server/cmd/token-server
 #
 # curl: https://security.alpinelinux.org/srcpkg/curl
 #
-FROM alpine:3.18.4
+FROM alpine:3.19.0
 COPY --from=builder /tmp/token-server /bin/token-server
 #RUN apk add curl=8.1.2-r0 libcrypto3=3.1.0-r4 libssl3=3.1.0-r4
 RUN apk update
