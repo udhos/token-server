@@ -9,20 +9,15 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"runtime"
 	"time"
 
 	"github.com/golang-jwt/jwt"
+	"github.com/udhos/boilerplate/boilerplate"
 	"github.com/udhos/boilerplate/envconfig"
 	_ "go.uber.org/automaxprocs"
 )
 
-const version = "0.3.0"
-
-func getVersion(me string) string {
-	return fmt.Sprintf("%s version=%s runtime=%s GOOS=%s GOARCH=%s GOMAXPROCS=%d",
-		me, version, runtime.Version(), runtime.GOOS, runtime.GOARCH, runtime.GOMAXPROCS(0))
-}
+const version = "1.0.0"
 
 type application struct {
 	clientCredentials bool
@@ -38,7 +33,7 @@ func main() {
 	me := filepath.Base(os.Args[0])
 
 	{
-		v := getVersion(me)
+		v := boilerplate.LongVersion(me + " version=" + version)
 		if showVersion {
 			fmt.Print(v)
 			fmt.Println()

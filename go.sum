@@ -71,8 +71,8 @@ github.com/prashantv/gostub v1.1.0/go.mod h1:A5zLQHz7ieHGG7is6LLXLz7I8+3LZzsrV0P
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.7.1 h1:5TQK59W5E3v0r2duFAb7P95B6hEeOyEnHRa8MjYSMTY=
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
-github.com/udhos/boilerplate v1.2.2 h1:CrO8ybSBJ96g0L6r0Cu5UL2RzzA/TNFgqe25LMyONcw=
-github.com/udhos/boilerplate v1.2.2/go.mod h1:dQBzD+sFLeJc9PJoSEtSHYi88Uq4B5qYS+tMzXGt1eM=
+github.com/udhos/boilerplate v1.2.3 h1:ldn9GJ8fhNbhcpY0qson3i8j1pmhDr285aK4goWYhhs=
+github.com/udhos/boilerplate v1.2.3/go.mod h1:tm08k2yWpsSl3KByKzV01JGrycaV0sQ1j+zrj93DBtI=
 go.uber.org/automaxprocs v1.5.3 h1:kWazyxZUrS3Gs4qUpbwo5kEIMGe/DAvi5Z4tl2NW4j8=
 go.uber.org/automaxprocs v1.5.3/go.mod h1:eRbA25aqJrxAbsLO0xy5jVwPt7FQnRgjW+efnwa1WM0=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
