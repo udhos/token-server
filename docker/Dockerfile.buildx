@@ -13,6 +13,12 @@ COPY go.* /tmp/app/
 WORKDIR /tmp/app
 RUN go mod tidy
 RUN go env -w CGO_ENABLED=0
+
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM"
+RUN go env -w GOARCH=$(echo $TARGETPLATFORM | cut -f2 -d/)
+
 RUN go build -o /tmp/token-server github.com/udhos/token-server/cmd/token-server
 
 #

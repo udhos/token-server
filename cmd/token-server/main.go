@@ -17,7 +17,7 @@ import (
 	_ "go.uber.org/automaxprocs"
 )
 
-const version = "0.2.1"
+const version = "0.3.0"
 
 func getVersion(me string) string {
 	return fmt.Sprintf("%s version=%s runtime=%s GOOS=%s GOARCH=%s GOMAXPROCS=%d",

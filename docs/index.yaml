@@ -2,6 +2,18 @@ apiVersion: v1
 entries:
   token-server:
   - apiVersion: v2
+    appVersion: 0.3.0
+    created: "2024-02-11T23:08:33.851170316-03:00"
+    description: A Helm chart for token-server
+    digest: 9416d8173139b372a40fd038520af7a623c908f3fda7f5c6bebf95fb25d73a21
+    name: token-server
+    sources:
+    - https://github.com/udhos/token-server
+    type: application
+    urls:
+    - https://udhos.github.io/token-server/token-server-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     appVersion: 0.2.1
     created: "2024-02-11T22:31:29.298487442-03:00"
     description: A Helm chart for token-server
@@ -49,4 +61,4 @@ entries:
     urls:
     - https://udhos.github.io/token-server/token-server-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-11T22:31:29.297941588-03:00"
+generated: "2024-02-11T23:08:33.850270115-03:00"
