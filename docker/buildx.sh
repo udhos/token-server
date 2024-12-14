@@ -21,3 +21,8 @@ docker buildx build \
    -f ./docker/Dockerfile.buildx .
 
 #echo "push: docker push udhos/$app:$version; docker push udhos/$app:latest"
+echo push:
+echo "docker push udhos/$app:$version; docker push udhos/$app:latest" > docker-push.sh
+chmod a+rx docker-push.sh
+echo docker-push.sh:
+cat docker-push.sh
