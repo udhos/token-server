@@ -11,13 +11,13 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/udhos/boilerplate/boilerplate"
 	"github.com/udhos/boilerplate/envconfig"
 	_ "go.uber.org/automaxprocs"
 )
 
-const version = "1.0.4"
+const version = "1.0.5"
 
 type application struct {
 	clientCredentials bool
@@ -67,7 +67,7 @@ func main() {
 
 	go listenAndServe(server, addr)
 
-	<-chan struct{}(nil)
+	select {} // wait forever
 }
 
 func register(mux *http.ServeMux, addr, path string, handler http.HandlerFunc) {
