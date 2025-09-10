@@ -15,10 +15,9 @@ import (
 	"github.com/udhos/boilerplate/boilerplate"
 	"github.com/udhos/boilerplate/envconfig"
 	"github.com/udhos/oauth2clientcredentials/clientcredentials"
-	_ "go.uber.org/automaxprocs"
 )
 
-const version = "1.0.6"
+const version = "1.0.7"
 
 type application struct {
 	clientCredentials bool

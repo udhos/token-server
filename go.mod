@@ -6,7 +6,6 @@ require (
 	github.com/golang-jwt/jwt/v5 v5.3.0
 	github.com/udhos/boilerplate v1.6.11
 	github.com/udhos/oauth2clientcredentials v0.0.4
-	go.uber.org/automaxprocs v1.6.0
 )
 
 require (
