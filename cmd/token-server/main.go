@@ -14,10 +14,11 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/udhos/boilerplate/boilerplate"
 	"github.com/udhos/boilerplate/envconfig"
+	"github.com/udhos/oauth2clientcredentials/clientcredentials"
 	_ "go.uber.org/automaxprocs"
 )
 
-const version = "1.0.5"
+const version = "1.0.6"
 
 type application struct {
 	clientCredentials bool
@@ -156,40 +157,39 @@ func handlerToken(w http.ResponseWriter, r *http.Request, app *application) {
 		return
 	}
 
-	var reply map[string]interface{}
+	var reply map[string]any
+	var replyStr string
 
 	if app.clientCredentials {
-		refreshToken, errRefresh := newToken(0)
-		if errRefresh != nil {
-			log.Printf("%s %s %s - refresh token - 500 server error: %v",
-				r.RemoteAddr, r.Method, r.RequestURI, errRefresh)
-			response(w, r, http.StatusInternalServerError, "server error")
-			return
-		}
+		/*
+			refreshToken, errRefresh := newToken(0)
+			if errRefresh != nil {
+				log.Printf("%s %s %s - refresh token - 500 server error: %v",
+					r.RemoteAddr, r.Method, r.RequestURI, errRefresh)
+				response(w, r, http.StatusInternalServerError, "server error")
+				return
+			}
+		*/
 
-		reply = map[string]interface{}{
-			"access_token":  accessToken,
-			"token_type":    "Bearer",
-			"refresh_token": refreshToken,
-			"expires_in":    app.expireSeconds,
-		}
+		replyStr = clientcredentials.EncodeResponseBody(accessToken, app.expireSeconds)
+
 	} else {
-		reply = map[string]interface{}{
+		reply = map[string]any{
 			"token":      accessToken,
 			"token_type": "Bearer",
 		}
-	}
-
-	buf, errJSON := json.Marshal(reply)
-	if errJSON != nil {
-		log.Printf("%s %s %s - json error - 500 server error", r.RemoteAddr, r.Method, r.RequestURI)
-		response(w, r, http.StatusInternalServerError, "server error")
-		return
+		buf, errJSON := json.Marshal(reply)
+		if errJSON != nil {
+			log.Printf("%s %s %s - json error - 500 server error", r.RemoteAddr, r.Method, r.RequestURI)
+			response(w, r, http.StatusInternalServerError, "server error")
+			return
+		}
+		replyStr = string(buf)
 	}
 
 	log.Printf("%s %s %s - 200 ok", r.RemoteAddr, r.Method, r.RequestURI)
 
-	httpJSON(w, string(buf), http.StatusOK)
+	httpJSON(w, replyStr, http.StatusOK)
 }
 
 func newToken(exp int) (string, error) {
