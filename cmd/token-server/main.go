@@ -17,7 +17,7 @@ import (
 	"github.com/udhos/oauth2clientcredentials/clientcredentials"
 )
 
-const version = "1.0.7"
+const version = "1.0.8"
 
 type application struct {
 	clientCredentials bool
