@@ -17,7 +17,7 @@ import (
 	"github.com/udhos/oauth2clientcredentials/clientcredentials"
 )
 
-const version = "1.0.8"
+const version = "1.0.9"
 
 type application struct {
 	clientCredentials bool
@@ -113,35 +113,27 @@ func handlerHealth(w http.ResponseWriter, r *http.Request) {
 
 var sampleSecretKey = []byte("SecretYouShouldHide")
 
-func getParam(r *http.Request, key string) string {
-	v := r.Form[key]
-	if v == nil {
-		return ""
-	}
-	return v[0]
-}
-
 func handlerToken(w http.ResponseWriter, r *http.Request, app *application) {
 
 	if app.clientCredentials {
-		if err := r.ParseForm(); err != nil {
-			log.Printf("handlerToken: ParseForm: err: %v", err)
+		req, errReq := clientcredentials.DecodeRequestBody(r)
+		if errReq != nil {
+			log.Printf("%s %s %s - decode request body - 400 bad request: %v",
+				r.RemoteAddr, r.Method, r.RequestURI, errReq)
+			response(w, r, http.StatusBadRequest, "bad request")
+			return
 		}
 
-		grantType := getParam(r, "grant_type")
-		clientID := getParam(r, "client_id")
-		clientSecret := getParam(r, "client_secret")
-
 		log.Printf("method=%s grant_type=%s client_id=%s client_secret=%s",
-			r.Method, grantType, clientID, clientSecret)
+			r.Method, req.GrantType, req.ClientID, req.ClientSecret)
 
-		if grantType != "client_credentials" {
+		if req.GrantType != "client_credentials" {
 			log.Printf("%s %s %s - wrong grant type - 401 unauthorized", r.RemoteAddr, r.Method, r.RequestURI)
 			response(w, r, http.StatusUnauthorized, "unauthorized")
 			return
 		}
 
-		if clientID != "admin" || clientSecret != "admin" {
+		if req.ClientID != "admin" || req.ClientSecret != "admin" {
 			log.Printf("%s %s %s - bad credentials - 401 unauthorized", r.RemoteAddr, r.Method, r.RequestURI)
 			response(w, r, http.StatusUnauthorized, "unauthorized")
 			return
@@ -160,16 +152,6 @@ func handlerToken(w http.ResponseWriter, r *http.Request, app *application) {
 	var replyStr string
 
 	if app.clientCredentials {
-		/*
-			refreshToken, errRefresh := newToken(0)
-			if errRefresh != nil {
-				log.Printf("%s %s %s - refresh token - 500 server error: %v",
-					r.RemoteAddr, r.Method, r.RequestURI, errRefresh)
-				response(w, r, http.StatusInternalServerError, "server error")
-				return
-			}
-		*/
-
 		replyStr = clientcredentials.EncodeResponseBody(accessToken, app.expireSeconds)
 
 	} else {
